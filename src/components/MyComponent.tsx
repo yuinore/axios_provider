@@ -1,16 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+let dataFetchCompleted = false;
+
 function MyComponent(): JSX.Element {
   const [url, setUrl] = useState('');
 
-  // 1度だけ実行する（実際には2度実行される）
   useEffect(() => {
+    // ここで axios の共通設定を初期化する
+    // useCookies などを使用してヘッダーなどの設定が可能
+    // この設定を1箇所に集約したい
+    axios.defaults.baseURL = 'https://api.waifu.pics/';
+    axios.defaults.headers.common.Authorization = `Barer <cookies.token>`;
+
+    console.log('Start calling API...');
     axios
-      .get('https://api.waifu.pics/sfw/waifu')
+      .get('/sfw/waifu')
       .then((res) => {
-        console.log(res.data);
-        setUrl(res.data.url);
+        // 本当に一度だけ実行する
+        if (!dataFetchCompleted) {
+          console.log(res.data);
+          setUrl(res.data.url);
+          dataFetchCompleted = true;
+        }
       })
       .catch((err) => {
         alert(err);
