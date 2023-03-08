@@ -34,9 +34,9 @@ function MyComponent(): JSX.Element {
   return (
     <>
       <h1>Random Waifu Image</h1>
-      <h2>Github: <a href="https://github.com/yuinore/axios_provider">https://github.com/yuinore/axios_provider</a></h2>
-      <h2>{url}</h2>
-      <img src={url} alt="random waifu" />
+      <p>Github: <a href="https://github.com/yuinore/axios_provider">https://github.com/yuinore/axios_provider</a></p>
+      <p>{url}</p>
+      <img src={url} alt="random waifu" style={{ maxWidth: "100%", maxHeight: "100%" }} />
     </>
   );
 }
