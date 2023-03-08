@@ -14,6 +14,10 @@ function AxiosProvider(props: { children: JSX.Element }): JSX.Element {
     // 試しに1000ミリ秒待機する意地悪ををしてみる
     // （実際にはこのsetTimeoutは不要）
     setTimeout(() => {
+      if (isAxiosInitialized) {
+        return;
+      }
+
       console.log('Axios initialization started...');
       axios = axiosInstance;
 
@@ -29,7 +33,7 @@ function AxiosProvider(props: { children: JSX.Element }): JSX.Element {
       // AxiosContext の変更を子コンポーネントに伝える
       setIsAxiosInitialized(true);
     }, 1000);
-  }, []);
+  }, [isAxiosInitialized]);
 
   return (
     <AxiosContext.Provider value={axios}>

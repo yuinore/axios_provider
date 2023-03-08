@@ -35,7 +35,7 @@ function MyComponent(): JSX.Element {
     <>
       <h1>Random Waifu Image</h1>
       <h2>{url}</h2>
-      <img src={url} />
+      <img src={url} alt="random waifu" />
     </>
   );
 }
